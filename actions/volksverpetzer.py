@@ -23,6 +23,6 @@ for option in options:
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 #driver = webdriver.Chrome('/usr/src/ungoogled-chromium/chromedriver') 
 driver.get("https://www.volksverpetzer.de/feed")
-time.sleep(30) 
+time.sleep(23) 
 print(driver.page_source)
 driver.close()
