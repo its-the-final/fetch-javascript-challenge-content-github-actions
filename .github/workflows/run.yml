@@ -24,6 +24,9 @@ concurrency:
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Check out this repo
         uses: actions/checkout@v2
@@ -41,13 +44,6 @@ jobs:
         run: pip install requests beautifulsoup4 pandas webdriver-manager selenium
       - name: Run the scraping script
         run: bash run.sh
-  deploy:
-    needs: scrape
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
