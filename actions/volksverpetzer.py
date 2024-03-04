@@ -3,6 +3,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 #from webdriver_manager.utils import ChromeType
+from selenium_stealth import stealth
 
 import time
 chrome_options = Options()
@@ -17,7 +18,16 @@ options = [
 ]
 for option in options:
     chrome_options.add_argument(option)
-
+chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+chrome_options.add_experimental_option('useAutomationExtension', False)
+stealth(driver,
+        languages=["en-US", "en"],
+        vendor="Google Inc.",
+        platform="Win32",
+        webgl_vendor="Intel Inc.",
+        renderer="Intel Iris OpenGL Engine",
+        fix_hairline=True
+)
 #driver_path = ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
 #driver = webdriver.Chrome(driver_path,options=options)
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
