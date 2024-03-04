@@ -5,7 +5,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 #from webdriver_manager.utils import ChromeType
 
 import time
-options = Options()
+chrome_options = Options()
 options = [
     "--headless",
     "--disable-gpu",
@@ -20,7 +20,7 @@ for option in options:
 
 #driver_path = ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
 #driver = webdriver.Chrome(driver_path,options=options)
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 #driver = webdriver.Chrome('/usr/src/ungoogled-chromium/chromedriver') 
 driver.get("https://www.volksverpetzer.de/feed")
 time.sleep(30) 
