@@ -1,6 +1,26 @@
-name: scrape
+name: selenium-challenge-fetch
+
 on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+
 jobs:
   scrape:
     runs-on: ubuntu-latest
@@ -11,15 +31,31 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
-      - name: Installed package list
-        run: apt list --installed
+      ##- name: Installed package list
+      ##  run: apt list --installed
       - name: Remove Chrome
-        run: sudo apt purge google-chrome-stable
-      - name: Remove default Chromium
-        run: sudo apt purge chromium-browser
-      - name: Install a new Chromium
-        run: sudo apt install -y chromium-browser
+        run: sudo apt purge -y google-chrome-stable chromium-browser
+      - name: install ungoogled chrom
+        run: bash -c "cd /usr/src;sudo wget -c https://github.com/clickot/ungoogled-chromium-binaries/releases/download/113.0.5672.63-1/ungoogled-chromium_113.0.5672.63-1.1_linux.tar.xz ;sudo unxz ungoogled-chromium_113.0.5672.63-1.1_linux.tar.xz;sudo tar xvf ungoogled-chromium_113.0.5672.63-1.1_linux.tar;sudo ln -s /usr/src/ungoogled-chromium_113.0.5672.63-1.1_linux/chrome /usr/bin/google-chrome"
       - name: Install all necessary packages
         run: pip install requests beautifulsoup4 pandas webdriver-manager selenium
       - name: Run the scraping script
         run: bash run.sh
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: './public'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
