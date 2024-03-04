@@ -41,7 +41,7 @@ jobs:
       - name: install ungoogled chrom
         run: bash -c "cd /usr/src;sudo wget -c https://github.com/clickot/ungoogled-chromium-binaries/releases/download/113.0.5672.63-1/ungoogled-chromium_113.0.5672.63-1.1_linux.tar.xz ;sudo unxz ungoogled-chromium_113.0.5672.63-1.1_linux.tar.xz;sudo tar xvf ungoogled-chromium_113.0.5672.63-1.1_linux.tar;sudo ln -s /usr/src/ungoogled-chromium_113.0.5672.63-1.1_linux/chrome /usr/bin/google-chrome"
       - name: Install all necessary packages
-        run: pip install requests beautifulsoup4 pandas webdriver-manager selenium
+        run: pip install requests beautifulsoup4 pandas webdriver-manager selenium selenium-stealth
       - name: Run the scraping script
         run: bash run.sh
       - name: Setup Pages
