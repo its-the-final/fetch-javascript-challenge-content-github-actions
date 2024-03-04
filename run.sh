@@ -1,5 +1,5 @@
 #!/bin/bash
-startdir=$pwd
+startdir=$(pwd)
 mkdir public
 
 for file in actions/*.sh;
