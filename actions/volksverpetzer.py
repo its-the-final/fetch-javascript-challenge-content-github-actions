@@ -20,6 +20,12 @@ for option in options:
     chrome_options.add_argument(option)
 chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
 chrome_options.add_experimental_option('useAutomationExtension', False)
+
+#driver_path = ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
+#driver = webdriver.Chrome(driver_path,options=options)
+#driver = webdriver.Chrome('/usr/src/ungoogled-chromium/chromedriver') 
+#driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+driver = webdriver.Remote("127.0.0.1:4444/wd/hub", options=chrome_options)
 stealth(driver,
         languages=["en-US", "en"],
         vendor="Google Inc.",
@@ -28,12 +34,6 @@ stealth(driver,
         renderer="Intel Iris OpenGL Engine",
         fix_hairline=True
 )
-#driver_path = ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
-#driver = webdriver.Chrome(driver_path,options=options)
-#driver = webdriver.Chrome('/usr/src/ungoogled-chromium/chromedriver') 
-#driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-driver = webdriver.Remote("127.0.0.1:4444/wd/hub", options=chrome_options)
-
 driver.get("https://www.volksverpetzer.de/feed")
 time.sleep(23) 
 print(driver.page_source)
