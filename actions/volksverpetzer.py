@@ -8,8 +8,8 @@ from selenium_stealth import stealth
 import time
 chrome_options = Options()
 options = [
-    "--headless",
-    "--disable-gpu",
+   # "--headless",
+   # "--disable-gpu",
     "--window-size=1920,1200",
     "--ignore-certificate-errors",
     "--disable-extensions",
@@ -26,14 +26,14 @@ chrome_options.add_experimental_option('useAutomationExtension', False)
 #driver = webdriver.Chrome('/usr/src/ungoogled-chromium/chromedriver') 
 #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 driver = webdriver.Remote("127.0.0.1:4444/wd/hub", options=chrome_options)
-stealth(driver,
-        languages=["en-US", "en"],
-        vendor="Google Inc.",
-        platform="Win32",
-        webgl_vendor="Intel Inc.",
-        renderer="Intel Iris OpenGL Engine",
-        fix_hairline=True
-)
+#stealth(driver,
+#        languages=["en-US", "en"],
+#        vendor="Google Inc.",
+#        platform="Win32",
+#        webgl_vendor="Intel Inc.",
+#        renderer="Intel Iris OpenGL Engine",
+#        fix_hairline=True
+#)
 driver.get("https://www.volksverpetzer.de/feed")
 time.sleep(23) 
 print(driver.page_source)
