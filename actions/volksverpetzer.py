@@ -35,7 +35,7 @@ driver = webdriver.Remote("127.0.0.1:4444/wd/hub", options=chrome_options)
 #        fix_hairline=True
 #)
 driver.get("https://www.volksverpetzer.de/feed")
-time.sleep(23) 
+time.sleep(10) 
 #print(driver.page_source)
 print(driver.execute_script('return document.getElementsByTagName("pre")[0].innerText'))
 
