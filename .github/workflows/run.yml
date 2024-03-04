@@ -42,7 +42,7 @@ jobs:
       - name: Run the scraping script
         run: bash run.sh
   deploy:
-    depends: scrape
+    needs: scrape
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
