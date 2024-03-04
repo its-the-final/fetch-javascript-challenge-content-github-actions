@@ -6,9 +6,18 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 import time
 options = Options()
-options.add_argument('--headless')
-options.add_argument('--no-sandbox')
-options.add_argument('--disable-dev-shm-usage')
+options = [
+    "--headless",
+    "--disable-gpu",
+    "--window-size=1920,1200",
+    "--ignore-certificate-errors",
+    "--disable-extensions",
+    "--no-sandbox",
+    "--disable-dev-shm-usage"
+]
+for option in options:
+    chrome_options.add_argument(option)
+
 #driver_path = ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
 #driver = webdriver.Chrome(driver_path,options=options)
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
