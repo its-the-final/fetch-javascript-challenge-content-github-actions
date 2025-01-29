@@ -4,8 +4,7 @@ name: selenium-challenge-fetch
   # Runs on pushes targeting the default branch
 on:
   push:
-#  schedule:
-#    - cron: '42 */2 * * *'
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
       name:
@@ -20,8 +19,8 @@ on:
           description: 'another_val'
           required: false
           default: '1234'
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+#  schedule:
+#    - cron: '42 */2 * * *'
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
